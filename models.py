@@ -30,6 +30,17 @@ class Meeting:
     def __hash__(self):
         return hash((self.__name, self.__num_people, self.__start_time, self.__end_time))
 
+    def __lt__(self, other):
+        return  (self.__num_people*((self.get_end_time() - self.get_start_time()).total_seconds())) <  (other.get_num_people()*((other.get_end_time() - other.get_start_time()).total_seconds()))
+    def __le__(self, other):
+        return (self.get_num_people()*((self.get_end_time() - self.get_start_time()).total_seconds())) <= (other.__num_people*((other.get_end_time() - other.get_start_time()).total_seconds()))
+    def __gt__(self, other):
+        return (self.get_num_people()*((self.get_end_time() - self.get_start_time()).total_seconds())) > (other.__num_people*((other.get_end_time() - other.get_start_time()).total_seconds()))
+    def __ge__(self, other):
+        return (self.get_num_people()*((self.get_end_time() - self.get_start_time()).total_seconds())) >= (other.__num_people*((other.get_end_time() - other.get_start_time()).total_seconds()))
+
+
+
 class Room:
     def __init__(self, name, num_chairs):
         self.__name = name
@@ -52,16 +63,26 @@ class Room:
     def __hash__(self):
         return hash((self.__name, self.__num_chairs))
 
+    def __lt__(self, other):
+        return self.get_num_chairs() < other.get_num_chairs()
+    def __le__(self, other):
+        return self.get_num_chairs() <= other.get_num_chairs()
+    def __gt__(self, other):
+        return self.get_num_chairs() > other.get_num_chairs()
+    def __ge__(self, other):
+        return self.get_num_chairs() >= other.get_num_chairs()
+
 class Calendar:
     def __init__(self):
         self.__meetings = {}
 
     def get_meetings(self):
         return self.__meetings
-    def add_room(self, name, num_chairs):
-        r = Room(name, num_chairs)
-        if (r not in self.__meetings):
-            self.__meetings[r] = set()
+
+
+    def add_room(self, room):
+        if (room not in self.__meetings):
+            self.__meetings[room] = set()
             return True
         return False
 
@@ -81,5 +102,5 @@ class Calendar:
                 if (mtg.get_end_time() > meeting.get_start_time()):
                     return False
             else:
-                return false
+                return False
         return True

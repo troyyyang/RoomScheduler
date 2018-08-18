@@ -6,19 +6,21 @@ class TestCalendar(unittest.TestCase):
 
     def test_add_room(self):
         c = Calendar()
-        self.assertTrue(c.add_room("Curie", 6))
-        self.assertFalse(c.add_room("Curie", 6))
         r = Room("Curie", 6)
+        self.assertTrue(c.add_room(r))
+        self.assertFalse(c.add_room(r))
         self.assertEqual(len(c.get_meetings().keys()), 1)
         self.assertEqual(len(c.get_meetings()[r]), 0)
-        self.assertTrue(c.add_room("Turing", 12))
+        a = Room("Turing", 12)
+        self.assertTrue(c.add_room(a))
         self.assertEqual(len(c.get_meetings().keys()), 2)
 
     def test_add_meeting(self):
         c = Calendar()
-        c.add_room("Curie", 6)
-        c.add_room("Turing", 10)
         r = Room("Curie", 6)
+        a = Room("Turing", 10)
+        c.add_room(r)
+        c.add_room(a)
         m = Meeting(datetime(2018, 8, 18, 9), datetime(2018, 8, 18, 10), 2, "project")
         self.assertTrue(c.add_meeting(m, r))
         n = Meeting(datetime(2018, 8, 18, 9, 30), datetime(2018, 8, 18, 10, 30), 2, "project2")
@@ -31,10 +33,6 @@ class TestCalendar(unittest.TestCase):
         self.assertTrue(c.add_meeting(j, r))
         self.assertEquals(len(c.get_meetings()[r]), 2)
 
-
-
-    def test_check_time_conflicts(self):
-        pass
 
 if __name__ == '__main__':
     unittest.main()
