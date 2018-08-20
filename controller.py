@@ -3,8 +3,10 @@ from view import *
 from datetime import *
 import heapq
 
-class MinStandController:
+# TODO remove debug print statements (probably after we thoroughly test)
 
+
+class MinStandController:
     def __init__(self):
         self.cal = Calendar()
         self.view = CommandLineView(self.cal)
@@ -19,12 +21,12 @@ class MinStandController:
 
             print("Assigning meeting " + meeting.get_name())
             left = 0
-            right = len(rooms)-1
+            right = len(rooms) - 1
             # print("Right starts as " + str(right))
             # print("Left starts as " + str(left))
-            while(left + 1 < right):
+            while (left + 1 < right):
 
-                mid = left + (right-left)//2
+                mid = left + (right - left) // 2
                 if (mid == 0):
                     break
                 if (mid > 75):
@@ -42,19 +44,18 @@ class MinStandController:
                     added = True
                     break
                 else:
-                    right+=1
+                    right += 1
             if not added:
                 while (left >= 0):
                     if (self.cal.add_meeting(meeting, rooms[right])):
                         added = True
                         break
                     else:
-                        left-=1
+                        left -= 1
             if not added:
                 #no rooms
                 print("No available rooms at this time")
                 return 0
-
 
 
 mc = MinStandController()
@@ -65,8 +66,10 @@ d = Room("d", 8)
 e = Room("e", 10)
 
 m1 = Meeting(datetime(2018, 8, 18, 9), datetime(2018, 8, 18, 12), 3, "project")
-m2 = Meeting(datetime(2018, 8, 18, 9), datetime(2018, 8, 18, 11), 4, "project2")
-m3 = Meeting(datetime(2018, 8, 18, 9), datetime(2018, 8, 18, 10), 7, "project3")
+m2 = Meeting(
+    datetime(2018, 8, 18, 9), datetime(2018, 8, 18, 11), 4, "project2")
+m3 = Meeting(
+    datetime(2018, 8, 18, 9), datetime(2018, 8, 18, 10), 7, "project3")
 
 mc.generate_schedule([c, d, a, e, b], [m3, m1, m2])
 mc.view.display()

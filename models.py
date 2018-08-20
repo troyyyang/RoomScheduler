@@ -1,6 +1,5 @@
-False
 class Meeting:
-    def __init__(self, start_time, end_time, num_people, name ):
+    def __init__(self, start_time, end_time, num_people, name):
         self.__start_time = start_time
         self.__end_time = end_time
         self.__num_people = num_people
@@ -8,37 +7,65 @@ class Meeting:
 
     def set_start_time(self, start_time):
         self.__start_time = start_time
+
     def set_end_time(self, end_time):
         self.__end_time = __end_time
+
     def set_num_people(self, num_people):
         self.__num_people = num_people
+
     def set_name(self, name):
         self.__name = name
+
     def get_start_time(self):
         return self.__start_time
+
     def get_end_time(self):
         return self.__end_time
+
     def get_num_people(self):
         return self.__num_people
+
     def get_name(self):
         return self.__name
 
     def __eq__(self, other):
-        return (self.__name, self.__start_time, self.__end_time, other.__num_people) == (other.get_name(), other.get_start_time(), other.get_end_time(), other.get_num_people())
+        return (self.__name, self.__start_time, self.__end_time,
+                other.__num_people) == (other.get_name(),
+                                        other.get_start_time(),
+                                        other.get_end_time(),
+                                        other.get_num_people())
+
     def __ne__(self, other):
-        return not(self == other)
+        return not (self == other)
+
     def __hash__(self):
-        return hash((self.__name, self.__num_people, self.__start_time, self.__end_time))
+        return hash((self.__name, self.__num_people, self.__start_time,
+                     self.__end_time))
 
     def __lt__(self, other):
-        return  (self.__num_people*((self.get_end_time() - self.get_start_time()).total_seconds())) <  (other.get_num_people()*((other.get_end_time() - other.get_start_time()).total_seconds()))
-    def __le__(self, other):
-        return (self.get_num_people()*((self.get_end_time() - self.get_start_time()).total_seconds())) <= (other.__num_people*((other.get_end_time() - other.get_start_time()).total_seconds()))
-    def __gt__(self, other):
-        return (self.get_num_people()*((self.get_end_time() - self.get_start_time()).total_seconds())) > (other.__num_people*((other.get_end_time() - other.get_start_time()).total_seconds()))
-    def __ge__(self, other):
-        return (self.get_num_people()*((self.get_end_time() - self.get_start_time()).total_seconds())) >= (other.__num_people*((other.get_end_time() - other.get_start_time()).total_seconds()))
+        return (self.__num_people * (
+            (self.get_end_time() - self.get_start_time()).total_seconds()
+        )) < (other.get_num_people() * (
+            (other.get_end_time() - other.get_start_time()).total_seconds()))
 
+    def __le__(self, other):
+        return (self.get_num_people() * (
+            (self.get_end_time() - self.get_start_time()).total_seconds()
+        )) <= (other.__num_people * (
+            (other.get_end_time() - other.get_start_time()).total_seconds()))
+
+    def __gt__(self, other):
+        return (self.get_num_people() * (
+            (self.get_end_time() - self.get_start_time()).total_seconds()
+        )) > (other.__num_people * (
+            (other.get_end_time() - other.get_start_time()).total_seconds()))
+
+    def __ge__(self, other):
+        return (self.get_num_people() * (
+            (self.get_end_time() - self.get_start_time()).total_seconds()
+        )) >= (other.__num_people * (
+            (other.get_end_time() - other.get_start_time()).total_seconds()))
 
 
 class Room:
@@ -48,29 +75,38 @@ class Room:
 
     def set_name(self, name):
         self.__name = name
+
     def set_num_chairs(self, num_chairs):
         self.__num_chairs = num_chairs
 
     def get_name(self):
         return self.__name
+
     def get_num_chairs(self):
         return self.__num_chairs
 
     def __eq__(self, other):
-        return (self.__name, self.__num_chairs) == (other.get_name(), other.get_num_chairs())
+        return (self.__name, self.__num_chairs) == (other.get_name(),
+                                                    other.get_num_chairs())
+
     def __ne__(self, other):
-        return not(self == other)
+        return not (self == other)
+
     def __hash__(self):
         return hash((self.__name, self.__num_chairs))
 
     def __lt__(self, other):
         return self.get_num_chairs() < other.get_num_chairs()
+
     def __le__(self, other):
         return self.get_num_chairs() <= other.get_num_chairs()
+
     def __gt__(self, other):
         return self.get_num_chairs() > other.get_num_chairs()
+
     def __ge__(self, other):
         return self.get_num_chairs() >= other.get_num_chairs()
+
 
 class Calendar:
     def __init__(self):
@@ -78,7 +114,6 @@ class Calendar:
 
     def get_meetings(self):
         return self.__meetings
-
 
     def add_room(self, room):
         if (room not in self.__meetings):
