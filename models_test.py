@@ -32,6 +32,8 @@ class TestCalendar(unittest.TestCase):
         j = Meeting(datetime(2018, 8, 18, 14, 30), datetime(2018, 8, 18, 15, 30), 2, "project5")
         self.assertTrue(c.add_meeting(j, r))
         self.assertEquals(len(c.get_meetings()[r]), 2)
+        self.assertFalse(c.add_meeting(j, r))
+
 
 
 if __name__ == '__main__':
